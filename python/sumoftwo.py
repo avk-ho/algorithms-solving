@@ -1,9 +1,9 @@
-#https://www.algoexpert.io/questions/Two%20Number%20Sum
+# https://www.algoexpert.io/questions/Two%20Number%20Sum
 
-#first version
-#not using python ability to search efficiently here
-#resulting in loops iterating through the whole array
-#added a quick end if a pair is found
+# first version
+# not using python ability to search efficiently here
+# resulting in loops iterating through the whole array
+# added a quick end if a pair is found
 def twoNumberSum(array, targetSum):
 	output = []
 	array_copy = array.copy()
