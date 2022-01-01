@@ -7,7 +7,7 @@
 def twoNumberSum(array, targetSum):
 	output = []
 	array_copy = array.copy()
-    for element in array:
+	for element in array:
 		array_copy.remove(element)
 		for element2 in array_copy:
 			#print(f"{element} - {element2}")
