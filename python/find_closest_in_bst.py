@@ -48,7 +48,7 @@ def findClosestValueInBst(tree, target):
 
         return closest
 
-# Fonctionnal, could be simplified
+# Fonctional, could be simplified
 
 # Second solution
 def findClosestValueInBst(tree, target):
