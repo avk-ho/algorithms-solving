@@ -1,6 +1,6 @@
 # https://www.algoexpert.io/questions/Merge%20Overlapping%20Intervals
 
-# Fist solution
+# First solution
 def mergeOverlappingIntervals(intervals):
     intervals.sort()
     output = []
