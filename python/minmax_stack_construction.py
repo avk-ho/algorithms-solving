@@ -22,7 +22,7 @@ class MinMaxStack:
             newMinMax = {
                 "min": number,
                 "max": number
-                }
+            }
         elif number > self.minmax[len(self.minmax) - 1]["max"]:
             newMinMax = {
                 "min": self.minmax[len(self.minmax) - 1]["min"],
