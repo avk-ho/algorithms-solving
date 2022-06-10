@@ -127,3 +127,90 @@ def minimumPassesOfMatrix(matrix):
 # [0, -2, -1]
 # [-5, 2, 0]
 # [-6, -2, 0]
+
+# Second solution (with correction)
+def minimumPassesOfMatrix(matrix):
+    def findAdjacentNums(coor_tuple):
+        to_convert_array = []
+        x_coor = coor_tuple[0]
+        y_coor = coor_tuple[1]
+
+        if x_coor > 0:
+            to_convert_array.append((x_coor - 1, y_coor))
+        if x_coor < len(matrix) - 1:
+            to_convert_array.append((x_coor + 1, y_coor))
+        if y_coor > 0:
+            to_convert_array.append((x_coor, y_coor - 1))
+        if y_coor < len(matrix[0]) - 1:
+            to_convert_array.append((x_coor, y_coor + 1))
+
+        return to_convert_array
+
+    def convertNums(to_convert_array, next_stack):
+        for coor_pair in to_convert_array:
+            x_coor = coor_pair[0]
+            y_coor = coor_pair[1]
+
+            current_num = matrix[x_coor][y_coor]
+
+            if current_num < 0:
+                matrix[x_coor][y_coor] *= -1
+                next_stack.append((x_coor, y_coor))
+            
+
+    def containsNegative(matrix):
+        x_coor = 0
+        y_coor = 0
+
+        while x_coor < len(matrix):
+            while y_coor < len(matrix[0]):
+                current_num = matrix[x_coor][y_coor]
+                if current_num < 0:
+                    return True
+                y_coor += 1
+            
+            x_coor += 1
+            y_coor = 0
+
+        return False
+
+    next_stack = []
+    x_coor = 0
+    y_coor = 0
+
+    # finding all initial positive numbers
+    while x_coor < len(matrix):
+        while y_coor < len(matrix[0]):
+            current_num = matrix[x_coor][y_coor]
+            if current_num > 0:
+                next_stack.append((x_coor, y_coor))
+
+            y_coor += 1
+
+        x_coor += 1
+        y_coor = 0
+
+    
+    number_of_passes = 0
+    while len(next_stack) > 0:
+        current_stack = next_stack
+        next_stack = []
+
+        while len(current_stack) > 0:
+            current_coor = current_stack.pop()
+            to_convert_array = findAdjacentNums(current_coor)
+            convertNums(to_convert_array, next_stack)
+        
+        print(next_stack)
+        number_of_passes += 1
+        
+    if not containsNegative(matrix):
+        return number_of_passes - 1
+    else:
+        return -1
+
+# uses 2 stacks/queues to find the next numbers to convert, then convert them
+# and repeat until there is no next number to convert, then checks if there are
+# any remaining negative numbers
+# Using one queue/stack is possible by keeping track of the length of the queue/stack
+# before loop through it
